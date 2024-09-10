@@ -26,7 +26,7 @@ ldflags="\
 "
 
 FetchWebDev() {
-  curl -L https://codeload.github.com/alist-org/web-dist/tar.gz/refs/heads/dev -o web-dist-dev.tar.gz
+  curl -L https://codeload.github.com/li-peifeng/Sweet-Cloud-Dist/tar.gz/refs/heads/dev -o web-dist-dev.tar.gz
   tar -zxvf web-dist-dev.tar.gz
   rm -rf public/dist
   mv -f web-dist-dev/dist public
@@ -34,7 +34,7 @@ FetchWebDev() {
 }
 
 FetchWebRelease() {
-  curl -L https://github.com/alist-org/alist-web/releases/latest/download/dist.tar.gz -o dist.tar.gz
+  curl -L https://github.com/li-peifeng/Sweet-Cloud-Web/releases/latest/download/dist.tar.gz -o dist.tar.gz
   tar -zxvf dist.tar.gz
   rm -rf public/dist
   mv -f dist public
@@ -235,7 +235,7 @@ BuildReleaseAndroid() {
 MakeRelease() {
   cd build
   mkdir compress
-  for i in $(find . -type f -name "$appName-linux-*"); do
+    for i in $(find . -type f -name "$appName-linux-*"); do
     cp "$i" alist
     tar -czvf compress/"$i".tar.gz alist
     rm -f alist
@@ -245,12 +245,12 @@ MakeRelease() {
     tar -czvf compress/"$i".tar.gz alist
     rm -f alist
   done
-  for i in $(find . -type f -name "$appName-darwin-*"); do
+    for i in $(find . -type f -name "$appName-darwin-*"); do
     cp "$i" alist
     tar -czvf compress/"$i".tar.gz alist
     rm -f alist
   done
-  for i in $(find . -type f -name "$appName-windows-*"); do
+    for i in $(find . -type f -name "$appName-windows-*"); do
     cp "$i" alist.exe
     zip compress/$(echo $i | sed 's/\.[^.]*$//').zip alist.exe
     rm -f alist.exe
