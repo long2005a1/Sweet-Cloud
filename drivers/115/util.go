@@ -20,8 +20,8 @@ import (
 	"github.com/alist-org/alist/v3/pkg/utils"
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 
-	driver115 "github.com/SheltonZhu/115driver/pkg/driver"
 	crypto "github.com/gaoyb7/115drive-webdav/115"
+	driver115 "github.com/lm379/115driver/pkg/driver"
 	"github.com/orzogc/fake115uploader/cipher"
 	"github.com/pkg/errors"
 )
@@ -74,7 +74,7 @@ func (d *Pan115) getFiles(fileId string) ([]FileObj, error) {
 }
 
 const (
-	appVer = "2.0.3.6"
+	appVer = "27.0.3.7"
 )
 
 func (c *Pan115) DownloadWithUA(pickCode, ua string) (*driver115.DownloadInfo, error) {
@@ -161,7 +161,7 @@ func (d *Pan115) rapidUpload(fileSize int64, fileName, dirID, preID, fileID stri
 
 	signKey, signVal := "", ""
 	for retry := true; retry; {
-		t := driver115.Now()
+		t := driver115.NowMilli()
 
 		if encodedToken, err = ecdhCipher.EncodeToken(t.ToInt64()); err != nil {
 			return nil, err

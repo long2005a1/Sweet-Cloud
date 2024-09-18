@@ -4,11 +4,11 @@ import (
 	"context"
 	"strings"
 
-	driver115 "github.com/SheltonZhu/115driver/pkg/driver"
 	"github.com/alist-org/alist/v3/internal/driver"
 	"github.com/alist-org/alist/v3/internal/model"
 	"github.com/alist-org/alist/v3/pkg/http_range"
 	"github.com/alist-org/alist/v3/pkg/utils"
+	driver115 "github.com/lm379/115driver/pkg/driver"
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
 )
