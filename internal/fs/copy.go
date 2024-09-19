@@ -105,7 +105,7 @@ func _copy(ctx context.Context, srcObjPath, dstDirPath string, lazyCache ...bool
 }
 
 func copyBetween2Storages(t *CopyTask, srcStorage, dstStorage driver.Driver, srcObjPath, dstDirPath string) error {
-	t.Status = "获取源对象中..."
+	t.Status = "获取源对象"
 	srcObj, err := op.Get(t.Ctx(), srcStorage, srcObjPath)
 	if err != nil {
 		return errors.WithMessagef(err, "源文件 [%s] 获取失败", srcObjPath)
