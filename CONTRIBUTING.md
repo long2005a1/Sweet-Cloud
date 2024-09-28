@@ -11,11 +11,11 @@ Prerequisites:
 - [gcc](https://gcc.gnu.org/)
 - [nodejs](https://nodejs.org/)
 
-Clone `alist` and `alist-web` anywhere:
+Clone `Long-Cloud` and `Long-Cloud-web` anywhere:
 
 ```shell
-$ git clone https://github.com/alist-org/alist.git
-$ git clone --recurse-submodules https://github.com/alist-org/alist-web.git
+$ git clone https://github.com/long2005a1/Long-Cloud.git
+$ git clone --recurse-submodules https://github.com/long2005a1/Long-Cloud-web.git
 ```
 You should switch to the `main` branch for development.
 
