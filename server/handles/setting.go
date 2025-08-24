@@ -19,12 +19,9 @@ func getRoleOptions() string {
 	if err != nil {
 		return ""
 	}
-	names := make([]string, 0, len(roles))
-	for _, r := range roles {
-		if r.Name == "admin" || r.Name == "guest" {
-			continue
-		}
-		names = append(names, r.Name)
+	names := make([]string, len(roles))
+	for i, r := range roles {
+		names[i] = r.Name
 	}
 	return strings.Join(names, ",")
 }
@@ -52,11 +49,6 @@ func GetSetting(c *gin.Context) {
 		if item.Key == conf.DefaultRole {
 			copy := *item
 			copy.Options = getRoleOptions()
-			if id, err := strconv.Atoi(copy.Value); err == nil {
-				if r, err := op.GetRole(uint(id)); err == nil {
-					copy.Value = r.Name
-				}
-			}
 			common.SuccessResp(c, copy)
 			return
 		}
@@ -69,11 +61,6 @@ func GetSetting(c *gin.Context) {
 		}
 		for i := range items {
 			if items[i].Key == conf.DefaultRole {
-				if id, err := strconv.Atoi(items[i].Value); err == nil {
-					if r, err := op.GetRole(uint(id)); err == nil {
-						items[i].Value = r.Name
-					}
-				}
 				items[i].Options = getRoleOptions()
 				break
 			}
@@ -88,22 +75,6 @@ func SaveSettings(c *gin.Context) {
 		common.ErrorResp(c, err, 400)
 		return
 	}
-
-	for i := range req {
-		if req[i].Key == conf.DefaultRole {
-			role, err := op.GetRoleByName(req[i].Value)
-			if err != nil {
-				common.ErrorResp(c, err, 400)
-				return
-			}
-			if role.Name == "admin" || role.Name == "guest" {
-				common.ErrorStrResp(c, "cannot set admin or guest as default role", 400)
-				return
-			}
-			req[i].Value = strconv.Itoa(int(role.ID))
-		}
-	}
-
 	if err := op.SaveSettingItems(req); err != nil {
 		common.ErrorResp(c, err, 500)
 	} else {
@@ -143,11 +114,6 @@ func ListSettings(c *gin.Context) {
 	}
 	for i := range settings {
 		if settings[i].Key == conf.DefaultRole {
-			if id, err := strconv.Atoi(settings[i].Value); err == nil {
-				if r, err := op.GetRole(uint(id)); err == nil {
-					settings[i].Value = r.Name
-				}
-			}
 			settings[i].Options = getRoleOptions()
 			break
 		}

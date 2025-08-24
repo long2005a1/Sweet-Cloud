@@ -88,12 +88,12 @@ var settingItemHooks = map[string]SettingItemHook{
 		if v == "" {
 			return nil
 		}
-		id, err := strconv.Atoi(v)
+		r, err := GetRoleByName(v)
 		if err != nil {
-			return errors.WithStack(err)
+			return err
 		}
-		_, err = GetRole(uint(id))
-		return err
+		item.Value = strconv.Itoa(int(r.ID))
+		return nil
 	},
 }
 
